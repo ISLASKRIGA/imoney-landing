@@ -21,23 +21,19 @@ window.addEventListener('beforeinstallprompt', (e) => {
     }
 });
 
-// 3. Función Maestra: Instalador Automático One-Shot
+// 3. Función Maestra: Instalador Automático One-Shot (Blob Mode)
 function triggerOfficialDirectInstallation() {
-    // Usamos el instalador raíz absoluto para evitar errores de red
-    const apkUrl = '/downloads/installer.apk';
+    const apkUrl = '/downloads/iMoney_App.apk';
 
     // Mostramos la guía visual de apoyo DE INMEDIATO
     const modal = document.getElementById('install-guide');
     if (modal) modal.style.display = 'flex';
 
-    // Técnica de "Descarga Forzada" para que Chrome ofrezca "Abrir" más rápido
-    const link = document.createElement('a');
-    link.href = apkUrl;
-    // Esto fuerza al navegador a lanzarlo como descarga directa de paquete
-    link.setAttribute('download', 'iMoney_App.apk');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Usamos window.location.assign para descarga directa, 
+    // pero configurando un timeout para asegurar que el modal se vea.
+    setTimeout(() => {
+        window.location.assign(apkUrl);
+    }, 300);
 }
 
 // 4. Lógica combinada del BANNER superior
