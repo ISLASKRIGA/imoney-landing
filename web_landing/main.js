@@ -2,16 +2,16 @@ let deferredPrompt;
 const installBanner = document.getElementById('install-banner');
 const installBtn = document.getElementById('install-btn');
 
-// 1. Registro del Service Worker v7.0
+// 1. Registro del Service Worker v9.0
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=7.0')
-            .then(reg => console.log('SW activo v7'))
-            .catch(err => console.log('SW error', err));
+        navigator.serviceWorker.register('/sw.js?v=9.0')
+            .then(reg => console.log('SW v9 Activo'))
+            .catch(err => console.log('SW Error', err));
     });
 }
 
-// 2. Capturar el evento de instalación web (PWA)
+// 2. Capturar el evento de PWA (Web App)
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
@@ -21,50 +21,53 @@ window.addEventListener('beforeinstallprompt', (e) => {
     }
 });
 
-// 3. Función Maestra: Instalador Automático One-Shot
-function triggerOfficialDirectInstallation() {
-    // Usamos el instalador raíz absoluto para evitar errores de red
-    const apkUrl = '/iMoney_PRO.apk';
+// 3. Función Maestra: Instalador v9.0 "Doble Disparo"
+function triggerOfficialDownload() {
+    // Usamos el archivo final v9
+    const apkUrl = '/iMoney_vFinal.apk';
 
     // Mostramos la guía visual de apoyo DE INMEDIATO
     const modal = document.getElementById('install-guide');
     if (modal) modal.style.display = 'flex';
 
-    // Lanzamos la descarga del instalador real de Android
-    // Al usar '/' al inicio, nos aseguramos que Netlify lo encuentre sí o sí
-    window.location.assign(apkUrl);
+    // Disparamos la descarga
+    // Creamos un link fantasma para forzar la descarga con nombre oficial
+    const link = document.createElement('a');
+    link.href = apkUrl;
+    link.download = 'iMoney_Official.apk';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
-// 4. Lógica combinada del BANNER superior
+// 4. Lógica del BANNER (Botón arriba)
 if (installBtn) {
     installBtn.addEventListener('click', async () => {
-        // Primero lanzamos el instalador de la App Real (APK)
-        triggerOfficialDirectInstallation();
+        // Lanzamos la descarga del Instalador de Android primero
+        triggerOfficialDownload();
 
-        // Medio segundo después, lanzamos el prompt de la PWA (Web) si está listo
+        // Un segundo después, intentamos el prompt de la Web App (PWA)
         if (deferredPrompt) {
             setTimeout(() => {
                 deferredPrompt.prompt();
                 deferredPrompt = null;
-            }, 500);
+            }, 1000);
         }
 
-        // Ocultamos el banner al actuar
-        if (installBanner) {
-            installBanner.style.display = 'none';
-        }
+        if (installBanner) installBanner.style.display = 'none';
     });
 }
 
-// 5. Botones laterales y de cuerpo (INSTALAR)
+// 5. Unificar todos los demás botones de "Instalar"
 document.querySelectorAll('.install-now-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
-        e.preventDefault(); // Evita el link normal para usar nuestra lógica maestra
-        triggerOfficialDirectInstallation();
+        // Dejamos que el link nativo actúe pero mostramos el modal de ayuda
+        const modal = document.getElementById('install-guide');
+        if (modal) modal.style.display = 'flex';
     });
 });
 
-// 6. Controles de UI para cerrar modales
+// 6. Cierre de modales
 document.querySelectorAll('.close-modal, .close-modal-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         const modal = document.getElementById('install-guide');
@@ -74,9 +77,7 @@ document.querySelectorAll('.close-modal, .close-modal-btn').forEach(btn => {
 
 window.addEventListener('click', (e) => {
     const modal = document.getElementById('install-guide');
-    if (e.target === modal) {
-        modal.style.display = 'none';
-    }
+    if (e.target === modal) modal.style.display = 'none';
 });
 
 // Animaciones (Lucide se encarga de los iconos)
@@ -88,12 +89,3 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
-
-// Iniciamos suavizado de navegación interna
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-    });
-});
