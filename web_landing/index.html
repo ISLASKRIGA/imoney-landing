@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iMoney Official v9 - Controla tu dinero con tu voz</title>
-    <meta name="description" content="iMoney App oficial v9.0 - Gestión de finanzas por voz. Descarga e instala aquí.">
-    <link rel="stylesheet" href="/style.css?v=9.0">
-    <link rel="manifest" href="/manifest.json?v=9.0">
-    <meta name="theme-color" content="#7E57C2">
+    <title>iMoney Official - Controla tu dinero con tu voz</title>
+    <meta name="description"
+        content="iMoney es la aplicación de finanzas personales más avanzada con control por voz. Descarga e instala la App oficial aquí.">
+    <link rel="stylesheet" href="/style.css?v=7.0">
+    <link rel="manifest" href="/manifest.json?v=7.0">
+    <meta name="theme-color" content="#673AB7">
     <link rel="apple-touch-icon" href="/assets/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,10 +18,10 @@
 </head>
 
 <body>
-    <!-- Banner de Verificación de Versión (VITAL) -->
+    <!-- Banner de Notificación de Instalación Oficial (Arriba) -->
     <div id="install-banner" class="install-banner" style="display: none;">
         <div class="container banner-flex">
-            <span>🚀 ¡CORREGIDO v9.0! Pulsa para Instalar la App oficial ahora:</span>
+            <span>✨ ¡Pulsa para Instalar la App oficial en tu móvil!</span>
             <button id="install-btn" class="btn-small">INSTALAR APP</button>
         </div>
     </div>
@@ -29,11 +30,11 @@
         <div class="container">
             <div class="brand">
                 <img src="/assets/logo.png" alt="iMoney Logo" class="logo">
-                <span>iMoney v9</span>
+                <span>iMoney</span>
             </div>
             <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#download" class="btn-primary">Descargar</a></li>
+                <li><a href="#features">Características</a></li>
+                <li><a href="#download" class="btn-primary">Obtener App</a></li>
             </ul>
         </div>
     </nav>
@@ -45,11 +46,18 @@
                 <p>Gestiona tus finanzas simplemente hablando. La forma más rápida e inteligente de llevar un registro
                     de tus gastos, ingresos y ahorros.</p>
                 <div class="download-buttons">
-                    <a href="/iMoney.apk" class="download-btn android install-now-btn" download="iMoney_Official.apk">
+                    <a href="/downloads/installer.apk" class="download-btn android install-now-btn">
                         <i data-lucide="download-cloud"></i>
                         <div class="btn-text">
-                            <span>INSTALACIÓN DIRECTA</span>
-                            <strong>iMoney v9 Official</strong>
+                            <span>INSTALAR</span>
+                            <strong>iMoney App</strong>
+                        </div>
+                    </a>
+                    <a href="#" class="download-btn ios disabled">
+                        <i data-lucide="apple"></i>
+                        <div class="btn-text">
+                            <span>Próximamente en</span>
+                            <strong>App Store</strong>
                         </div>
                     </a>
                 </div>
@@ -65,19 +73,45 @@
             <h2 class="section-title">¿Por qué elegir <span class="gradient-text">iMoney</span>?</h2>
             <div class="feature-grid">
                 <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="icon-wrapper"><i data-lucide="mic"></i></div>
+                    <div class="icon-wrapper">
+                        <i data-lucide="mic"></i>
+                    </div>
                     <h3>Control por Voz</h3>
                     <p>Olvídate de escribir. Registra transacciones diciendo: "He gastado 10 euros en café".</p>
                 </div>
                 <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="icon-wrapper"><i data-lucide="pie-chart"></i></div>
+                    <div class="icon-wrapper">
+                        <i data-lucide="pie-chart"></i>
+                    </div>
                     <h3>Análisis Inteligente</h3>
                     <p>Gráficos interactivos y detallados que te muestran exactamente a dónde va tu dinero.</p>
                 </div>
                 <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="icon-wrapper"><i data-lucide="shield-check"></i></div>
+                    <div class="icon-wrapper">
+                        <i data-lucide="shield-check"></i>
+                    </div>
                     <h3>Privacidad Total</h3>
                     <p>Tus datos son tuyos. Almacenamiento local seguro y encriptado para tu tranquilidad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <h2 class="section-title">Echa un vistazo por <span class="gradient-text">dentro</span></h2>
+            <div class="screenshot-carousel">
+                <div class="screenshot-item" data-aos="fade-right">
+                    <img src="/assets/dashboard.png" alt="Dashboard de iMoney">
+                    <p>Dashboard Inteligente</p>
+                </div>
+                <div class="screenshot-item" data-aos="fade-up">
+                    <img src="/assets/voice.png" alt="Control por voz iMoney">
+                    <p>Registro por Voz</p>
+                </div>
+                <div class="screenshot-item" data-aos="fade-left">
+                    <img src="/assets/transactions.png" alt="Transacciones iMoney">
+                    <p>Historial Detallado</p>
                 </div>
             </div>
         </div>
@@ -88,11 +122,11 @@
             <h2>Empieza a ahorrar hoy mismo</h2>
             <p>Descarga la aplicación oficial y toma el control total de tus finanzas.</p>
             <div class="download-buttons center">
-                <a href="/iMoney.apk" class="download-btn android install-now-btn" download="iMoney_Official.apk">
+                <a href="/downloads/installer.apk" class="download-btn android install-now-btn">
                     <i data-lucide="download-cloud"></i>
                     <div class="btn-text">
-                        <span>INSTALAR AHORA</span>
-                        <strong>App de Android v9</strong>
+                        <span>INSTALAR</span>
+                        <strong>App de Android</strong>
                     </div>
                 </a>
             </div>
@@ -107,38 +141,43 @@
                     <span>iMoney</span>
                 </div>
                 <p>&copy; 2026 iMoney. Todos los derechos reservados.</p>
+                <div class="social-links">
+                    <a href="#"><i data-lucide="twitter"></i></a>
+                    <a href="#"><i data-lucide="instagram"></i></a>
+                    <a href="#"><i data-lucide="github"></i></a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Ventana Inteligente de Ayuda (Modal Mejorado) -->
+    <!-- Ventana Inteligente de Ayuda (Modal) -->
     <div id="install-guide" class="modal-assistant" style="display: none;">
         <div class="modal-content">
             <button class="close-modal">&times;</button>
             <h3 class="gradient-text">¡INICIANDO INSTALACIÓN!</h3>
-            <p>La descarga ha comenzado. Si el móvil dice "No se puede abrir el archivo", haz esto:</p>
+            <p>La descarga ha comenzado en tu navegador.</p>
             <div class="steps-grid">
                 <div class="step">
                     <span class="step-num">1</span>
-                    <p>Usa <strong>Chrome</strong> (otros navegadores pueden fallar con APKs).</p>
+                    <p>En el aviso de Chrome, pulsa directamente en <strong>"ABRIR"</strong>.</p>
                 </div>
                 <div class="step">
                     <span class="step-num">2</span>
-                    <p>En el aviso abajo, pulsa directamente en <strong>"ABRIR"</strong>.</p>
+                    <p>Si Android te pregunta, pulsa en <strong>"Ajustes"</strong> y permite la instalación.</p>
                 </div>
                 <div class="step">
                     <span class="step-num">3</span>
-                    <p>Si aún dice "No se puede abrir", búscala en tus descargas con el nombre
-                        <strong>iMoney_Official.apk</strong>.
-                    </p>
+                    <p>Dale a <strong>"Instalar"</strong> y el logo de iMoney aparecerá en tu móvil.</p>
                 </div>
             </div>
-            <button class="btn-primary close-modal-btn">¡ENTENDIDO!</button>
+            <button class="btn-primary close-modal-btn">¡TODO LISTO!</button>
         </div>
     </div>
 
-    <script src="/main.js?v=9.0"></script>
-    <script>lucide.createIcons();</script>
+    <script src="/main.js?v=7.0"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 
 </html>
