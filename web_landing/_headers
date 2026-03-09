@@ -1,4 +1,5 @@
 /iMoney_App.apk
-  Content-Type: application/octet-stream
+  Content-Type: application/vnd.android.package-archive
   Content-Disposition: attachment; filename="iMoney.apk"
+  X-Content-Type-Options: nosniff
   Access-Control-Allow-Origin: *
