@@ -1,44 +1,73 @@
-// Función de experto para forzar la instalación
-function forceInstall(url) {
-    // Si estamos en un navegador que soporta la redirección directa al instalador
-    window.location.assign(url);
+let deferredPrompt;
+const installBanner = document.getElementById('install-banner');
+const installBtn = document.getElementById('install-btn');
 
-    // Mostramos el modal de ayuda con un botón de reintento directo
-    const modal = document.getElementById('install-guide');
-    if (modal) modal.style.display = 'flex';
+// Registro del Service Worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js?v=4.0')
+            .then(reg => console.log('SW registrado'))
+            .catch(err => console.log('SW error', err));
+    });
 }
 
-// Variables para el asistente
-const downloadBtns = document.querySelectorAll('.download-btn.android');
-const modal = document.getElementById('install-guide');
-const closeBtns = document.querySelectorAll('.close-modal, .close-modal-btn');
+// Lógica de captura del evento de instalación PWA
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    // Mostrar el banner de instalación arriba
+    if (installBanner) {
+        installBanner.style.display = 'block';
+    }
+});
 
-// Lógica de los botones de descarga
-downloadBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        // En lugar de e.preventDefault(), dejamos que el navegador inicie la descarga
-        // Pero activamos el UI de ayuda inmediatamente
-        if (modal) {
-            modal.style.display = 'flex';
+// Al pulsar el botón del banner (INSTALAR)
+if (installBtn) {
+    installBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User choice: ${outcome}`);
+            deferredPrompt = null;
         }
+
+        // Acción combinada: También mostramos el asistente de APK por si acaso
+        const modal = document.getElementById('install-guide');
+        if (modal) modal.style.display = 'flex';
+
+        // Y activamos la descarga del APK real para estar seguros
+        window.location.href = 'downloads/iMoney.apk';
+    });
+}
+
+// Botones de "INSTALAR" en el cuerpo de la página
+document.querySelectorAll('.install-now-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        // Mostramos el asistente visual
+        const modal = document.getElementById('install-guide');
+        if (modal) modal.style.display = 'flex';
+
+        // El link href="downloads/iMoney.apk" hará el resto
     });
 });
 
-// Cerrar el modal
-closeBtns.forEach(btn => {
+// Cerrar modales y asistentes
+document.querySelectorAll('.close-modal, .close-modal-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+        const modal = document.getElementById('install-guide');
         if (modal) modal.style.display = 'none';
     });
 });
 
-// Cerrar al pulsar fuera del contenido
+// Cerrar banner PWA
 window.addEventListener('click', (e) => {
+    const modal = document.getElementById('install-guide');
     if (e.target === modal) {
         modal.style.display = 'none';
     }
 });
 
-// Animaciones on scroll
+// Animaciones y UI
 const observerOptions = { threshold: 0.1 };
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
