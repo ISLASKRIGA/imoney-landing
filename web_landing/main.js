@@ -2,55 +2,54 @@ let deferredPrompt;
 const installBanner = document.getElementById('install-banner');
 const installBtn = document.getElementById('install-btn');
 
-// 1. Registro del Service Worker v6.0
+// 1. Registro del Service Worker v7.0
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js?v=6.0')
-            .then(reg => console.log('SW activo'))
+        navigator.serviceWorker.register('/sw.js?v=7.0')
+            .then(reg => console.log('SW activo v7'))
             .catch(err => console.log('SW error', err));
     });
 }
 
-// 2. Capturar el evento de Arriba que pidió el usuario
+// 2. Capturar el evento de instalación web (PWA)
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    // Mostrar la notificación proactiva arriba
+    // Mostrar el banner arriba que pidió el usuario
     if (installBanner) {
         installBanner.style.display = 'block';
     }
 });
 
-// 3. Función Maestra: Instalación AUTOMÁTICA ONE-SHOT
+// 3. Función Maestra: Instalador Automático One-Shot
 function triggerOfficialDirectInstallation() {
-    // Usamos el instalador fresco v6 para evitar caché
-    const apkUrl = 'downloads/iMoney_Official_Installer.apk?v=6.0';
+    // Usamos el instalador raíz absoluto para evitar errores de red
+    const apkUrl = '/downloads/installer.apk?v=7.0';
 
-    // Mostramos la guía visual de apoyo para que el usuario sepa que está pasando
+    // Mostramos la guía visual de apoyo DE INMEDIATO
     const modal = document.getElementById('install-guide');
     if (modal) modal.style.display = 'flex';
 
-    // Disparamos la descarga del instalador real de Android
-    // Al usar 'attachment' en el header, Chrome suele ofrecer "Abrir" al terminar
+    // Lanzamos la descarga del instalador real de Android
+    // Al usar '/' al inicio, nos aseguramos que Netlify lo encuentre sí o sí
     window.location.assign(apkUrl);
 }
 
-// 4. Lógica combinada del BANNER (Botón arriba)
+// 4. Lógica combinada del BANNER superior
 if (installBtn) {
     installBtn.addEventListener('click', async () => {
-        // Primero lanzamos la descarga e instalación de la App de Android
+        // Primero lanzamos el instalador de la App Real (APK)
         triggerOfficialDirectInstallation();
 
-        // Un segundo después lanzamos el prompte de instalación de la Web (PWA)
-        // para que no se pisen. Esto hace que sea "automático"
+        // Medio segundo después, lanzamos el prompt de la PWA (Web) si está listo
         if (deferredPrompt) {
             setTimeout(() => {
                 deferredPrompt.prompt();
                 deferredPrompt = null;
-            }, 1000);
+            }, 500);
         }
 
-        // Ocultamos el banner
+        // Ocultamos el banner al actuar
         if (installBanner) {
             installBanner.style.display = 'none';
         }
@@ -60,12 +59,12 @@ if (installBtn) {
 // 5. Botones laterales y de cuerpo (INSTALAR)
 document.querySelectorAll('.install-now-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Evita el link normal para usar nuestra lógica maestra
         triggerOfficialDirectInstallation();
     });
 });
 
-// 6. Controles de UI (Cerrar asistentes)
+// 6. Controles de UI para cerrar modales
 document.querySelectorAll('.close-modal, .close-modal-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         const modal = document.getElementById('install-guide');
@@ -80,7 +79,7 @@ window.addEventListener('click', (e) => {
     }
 });
 
-// Animaciones (Lucide ya está cargado en index.html)
+// Animaciones (Lucide se encarga de los iconos)
 const observerOptions = { threshold: 0.1 };
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -90,7 +89,7 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
 
-// Smooth scroll
+// Iniciamos suavizado de navegación interna
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();

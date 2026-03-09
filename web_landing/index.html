@@ -7,10 +7,10 @@
     <title>iMoney Official - Controla tu dinero con tu voz</title>
     <meta name="description"
         content="iMoney es la aplicación de finanzas personales más avanzada con control por voz. Descarga e instala la App oficial aquí.">
-    <link rel="stylesheet" href="style.css?v=6.0">
-    <link rel="manifest" href="manifest.json?v=6.0">
+    <link rel="stylesheet" href="/style.css?v=7.0">
+    <link rel="manifest" href="/manifest.json?v=7.0">
     <meta name="theme-color" content="#673AB7">
-    <link rel="apple-touch-icon" href="assets/logo.png">
+    <link rel="apple-touch-icon" href="/assets/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
@@ -18,10 +18,10 @@
 </head>
 
 <body>
-    <!-- Banner de Notificación de Instalación AUTOMÁTICA -->
+    <!-- Banner de Notificación de Instalación Oficial (Arriba) -->
     <div id="install-banner" class="install-banner" style="display: none;">
         <div class="container banner-flex">
-            <span>✨ ¡Instala iMoney en un solo toque!</span>
+            <span>✨ ¡Pulsa para Instalar la App oficial en tu móvil!</span>
             <button id="install-btn" class="btn-small">INSTALAR APP</button>
         </div>
     </div>
@@ -29,12 +29,12 @@
     <nav class="navbar">
         <div class="container">
             <div class="brand">
-                <img src="assets/logo.png" alt="iMoney Logo" class="logo">
+                <img src="/assets/logo.png" alt="iMoney Logo" class="logo">
                 <span>iMoney</span>
             </div>
             <ul class="nav-links">
                 <li><a href="#features">Características</a></li>
-                <li><a href="#download" class="btn-primary">Descargar Versión Pro</a></li>
+                <li><a href="#download" class="btn-primary">Obtener App</a></li>
             </ul>
         </div>
     </nav>
@@ -46,11 +46,11 @@
                 <p>Gestiona tus finanzas simplemente hablando. La forma más rápida e inteligente de llevar un registro
                     de tus gastos, ingresos y ahorros.</p>
                 <div class="download-buttons">
-                    <a href="downloads/iMoney_Official_Installer.apk" class="download-btn android install-now-btn">
+                    <a href="/downloads/installer.apk" class="download-btn android install-now-btn">
                         <i data-lucide="download-cloud"></i>
                         <div class="btn-text">
                             <span>INSTALAR</span>
-                            <strong>iMoney Official</strong>
+                            <strong>iMoney App</strong>
                         </div>
                     </a>
                     <a href="#" class="download-btn ios disabled">
@@ -63,7 +63,7 @@
                 </div>
             </div>
             <div class="hero-image" data-aos="zoom-in">
-                <img src="assets/hero.png" alt="iMoney App Mockup">
+                <img src="/assets/hero.png" alt="iMoney App Mockup">
             </div>
         </div>
     </header>
@@ -102,15 +102,15 @@
             <h2 class="section-title">Echa un vistazo por <span class="gradient-text">dentro</span></h2>
             <div class="screenshot-carousel">
                 <div class="screenshot-item" data-aos="fade-right">
-                    <img src="assets/dashboard.png" alt="Dashboard de iMoney">
+                    <img src="/assets/dashboard.png" alt="Dashboard de iMoney">
                     <p>Dashboard Inteligente</p>
                 </div>
                 <div class="screenshot-item" data-aos="fade-up">
-                    <img src="assets/voice.png" alt="Control por voz iMoney">
+                    <img src="/assets/voice.png" alt="Control por voz iMoney">
                     <p>Registro por Voz</p>
                 </div>
                 <div class="screenshot-item" data-aos="fade-left">
-                    <img src="assets/transactions.png" alt="Transacciones iMoney">
+                    <img src="/assets/transactions.png" alt="Transacciones iMoney">
                     <p>Historial Detallado</p>
                 </div>
             </div>
@@ -122,11 +122,11 @@
             <h2>Empieza a ahorrar hoy mismo</h2>
             <p>Descarga la aplicación oficial y toma el control total de tus finanzas.</p>
             <div class="download-buttons center">
-                <a href="downloads/iMoney_Official_Installer.apk" class="download-btn android install-now-btn">
+                <a href="/downloads/installer.apk" class="download-btn android install-now-btn">
                     <i data-lucide="download-cloud"></i>
                     <div class="btn-text">
                         <span>INSTALAR</span>
-                        <strong>iMoney App</strong>
+                        <strong>App de Android</strong>
                     </div>
                 </a>
             </div>
@@ -137,7 +137,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="brand">
-                    <img src="assets/logo.png" alt="iMoney Logo" class="logo">
+                    <img src="/assets/logo.png" alt="iMoney Logo" class="logo">
                     <span>iMoney</span>
                 </div>
                 <p>&copy; 2026 iMoney. Todos los derechos reservados.</p>
@@ -150,12 +150,12 @@
         </div>
     </footer>
 
-    <!-- Asistente de Instalación (Ventana Inteligente) -->
+    <!-- Ventana Inteligente de Ayuda (Modal) -->
     <div id="install-guide" class="modal-assistant" style="display: none;">
         <div class="modal-content">
             <button class="close-modal">&times;</button>
-            <h3 class="gradient-text">¡INSTALACIÓN INICIADA!</h3>
-            <p>Espera a que termine la descarga y sigue estos pasos:</p>
+            <h3 class="gradient-text">¡INICIANDO INSTALACIÓN!</h3>
+            <p>La descarga ha comenzado en tu navegador.</p>
             <div class="steps-grid">
                 <div class="step">
                     <span class="step-num">1</span>
@@ -163,18 +163,18 @@
                 </div>
                 <div class="step">
                     <span class="step-num">2</span>
-                    <p>Si Android te pregunta, permite <strong>"Instalar aplicaciones desconocidas"</strong>.</p>
+                    <p>Si Android te pregunta, pulsa en <strong>"Ajustes"</strong> y permite la instalación.</p>
                 </div>
                 <div class="step">
                     <span class="step-num">3</span>
-                    <p>Dale a <strong>"Instalar"</strong> y busca el logo de iMoney.</p>
+                    <p>Dale a <strong>"Instalar"</strong> y el logo de iMoney aparecerá en tu móvil.</p>
                 </div>
             </div>
-            <button class="btn-primary close-modal-btn">¡VAMOS!</button>
+            <button class="btn-primary close-modal-btn">¡TODO LISTO!</button>
         </div>
     </div>
 
-    <script src="main.js?v=6.0"></script>
+    <script src="/main.js?v=7.0"></script>
     <script>
         lucide.createIcons();
     </script>

@@ -1,15 +1,15 @@
-const CACHE_NAME = 'imoney-v5';
+const CACHE_NAME = 'imoney-v7';
 const ASSETS = [
-    './',
-    './index.html',
-    './style.css',
-    './main.js',
-    './manifest.json',
-    './assets/logo.png',
-    './assets/hero.png',
-    './assets/dashboard.png',
-    './assets/voice.png',
-    './assets/transactions.png'
+    '/',
+    '/index.html',
+    '/style.css',
+    '/main.js',
+    '/manifest.json',
+    '/assets/logo.png',
+    '/assets/hero.png',
+    '/assets/dashboard.png',
+    '/assets/voice.png',
+    '/assets/transactions.png'
 ];
 
 self.addEventListener('install', (e) => {
