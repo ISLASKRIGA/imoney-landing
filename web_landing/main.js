@@ -30,9 +30,14 @@ function triggerOfficialDirectInstallation() {
     const modal = document.getElementById('install-guide');
     if (modal) modal.style.display = 'flex';
 
-    // Lanzamos la descarga del instalador real de Android
-    // Al usar '/' al inicio, nos aseguramos que Netlify lo encuentre sí o sí
-    window.location.assign(apkUrl);
+    // Técnica de "Descarga Forzada" para que Chrome ofrezca "Abrir" más rápido
+    const link = document.createElement('a');
+    link.href = apkUrl;
+    // Esto fuerza al navegador a lanzarlo como descarga directa de paquete
+    link.setAttribute('download', 'iMoney_App.apk');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 // 4. Lógica combinada del BANNER superior
