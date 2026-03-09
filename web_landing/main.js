@@ -1,22 +1,11 @@
-// Intentar lanzar el instalador de Android directamente
-function installApp(url) {
-    const isAndroid = /Android/i.test(navigator.userAgent);
+// Función de experto para forzar la instalación
+function forceInstall(url) {
+    // Si estamos en un navegador que soporta la redirección directa al instalador
+    window.location.assign(url);
 
-    if (isAndroid) {
-        // Este es un "Intent URL" de Android. Intenta pasarle el archivo directamente al instalador del sistema.
-        const intentUrl = `intent:${url}#Intent;action=android.intent.action.VIEW;type=application/vnd.android.package-archive;end`;
-
-        // Intentamos abrir el intent
-        window.location.href = intentUrl;
-
-        // Si el intent falla o no hace nada en 2 segundos, hacemos el fallback a la descarga normal
-        setTimeout(() => {
-            window.location.href = url;
-        }, 2000);
-    } else {
-        // Para otros sistemas o si falla, descarga normal
-        window.location.href = url;
-    }
+    // Mostramos el modal de ayuda con un botón de reintento directo
+    const modal = document.getElementById('install-guide');
+    if (modal) modal.style.display = 'flex';
 }
 
 // Variables para el asistente
@@ -27,17 +16,11 @@ const closeBtns = document.querySelectorAll('.close-modal, .close-modal-btn');
 // Lógica de los botones de descarga
 downloadBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
-        e.preventDefault(); // Detenemos la descarga estándar para intentar el Intent
-
-        const apkUrl = btn.getAttribute('href');
-
-        // Mostramos el asistente visual por si acaso el intent no salta solo
+        // En lugar de e.preventDefault(), dejamos que el navegador inicie la descarga
+        // Pero activamos el UI de ayuda inmediatamente
         if (modal) {
             modal.style.display = 'flex';
         }
-
-        // Lanzamos la lógica de instalación proactiva
-        installApp(apkUrl);
     });
 });
 

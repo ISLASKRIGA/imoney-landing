@@ -1,0 +1,2 @@
+# Ensure APKs are treated as binary files and never modified
+*.apk binary
