@@ -24,7 +24,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 // 3. Función Maestra: Instalador Automático One-Shot
 function triggerOfficialDirectInstallation() {
     // Usamos el instalador raíz absoluto para evitar errores de red
-    const apkUrl = '/iMoney_Install_v8.apk';
+    const apkUrl = '/iMoney_PRO.apk';
 
     // Mostramos la guía visual de apoyo DE INMEDIATO
     const modal = document.getElementById('install-guide');
