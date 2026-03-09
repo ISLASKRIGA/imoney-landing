@@ -2,11 +2,15 @@ let deferredPrompt;
 const installBanner = document.getElementById('install-banner');
 const installBtn = document.getElementById('install-btn');
 
-// 1. Registro del Service Worker v7.0
+// 1. Registro del Service Worker v8.0 (Limpieza de caché profunda)
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=7.0')
-            .then(reg => console.log('SW activo v7'))
+        navigator.serviceWorker.register('/sw.js?v=8.0')
+            .then(reg => {
+                console.log('SW activo v8');
+                // Forzamos actualización inmediata si hay una nueva versión
+                reg.update();
+            })
             .catch(err => console.log('SW error', err));
     });
 }
@@ -21,35 +25,35 @@ window.addEventListener('beforeinstallprompt', (e) => {
     }
 });
 
-// 3. Función Maestra: Instalador Automático One-Shot
+// 3. Función Maestra: Instalador Automático One-Shot Definitivo
 function triggerOfficialDirectInstallation() {
-    // Usamos el instalador raíz absoluto para evitar errores de red
-    const apkUrl = '/downloads/installer.apk';
+    // Usamos el archivo en la raíz para evitar fallos de ruta o CDN cache
+    const apkUrl = '/installer.apk';
 
     // Mostramos la guía visual de apoyo DE INMEDIATO
     const modal = document.getElementById('install-guide');
     if (modal) modal.style.display = 'flex';
 
     // Lanzamos la descarga del instalador real de Android
-    // Al usar '/' al inicio, nos aseguramos que Netlify lo encuentre sí o sí
+    // Sin parámetros basura (?v=X) para que Chrome lo trate como una descarga pura
     window.location.assign(apkUrl);
 }
 
-// 4. Lógica combinada del BANNER superior
+// 4. Lógica combinada del BANNER superior (INSTALAR APP)
 if (installBtn) {
     installBtn.addEventListener('click', async () => {
-        // Primero lanzamos el instalador de la App Real (APK)
+        // Lanzamos la descarga de la APK Real
         triggerOfficialDirectInstallation();
 
-        // Medio segundo después, lanzamos el prompt de la PWA (Web) si está listo
+        // Esperamos medio segundo para no saturar procesos y lanzamos el prompt de la Web (PWA)
         if (deferredPrompt) {
             setTimeout(() => {
                 deferredPrompt.prompt();
                 deferredPrompt = null;
-            }, 500);
+            }, 600);
         }
 
-        // Ocultamos el banner al actuar
+        // Ocultamos el banner
         if (installBanner) {
             installBanner.style.display = 'none';
         }
@@ -59,7 +63,7 @@ if (installBtn) {
 // 5. Botones laterales y de cuerpo (INSTALAR)
 document.querySelectorAll('.install-now-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
-        e.preventDefault(); // Evita el link normal para usar nuestra lógica maestra
+        e.preventDefault();
         triggerOfficialDirectInstallation();
     });
 });
@@ -79,7 +83,7 @@ window.addEventListener('click', (e) => {
     }
 });
 
-// Animaciones (Lucide se encarga de los iconos)
+// Animaciones (Lucide ya está en index.html)
 const observerOptions = { threshold: 0.1 };
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

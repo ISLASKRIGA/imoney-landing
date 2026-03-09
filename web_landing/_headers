@@ -1,3 +1,1 @@
-/downloads/installer.apk
-  Content-Type: application/vnd.android.package-archive
-  Access-Control-Allow-Origin: *
+# No custom headers for .apk. Let Netlify use defaults.
