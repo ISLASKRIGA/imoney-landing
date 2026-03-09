@@ -1,9 +1,10 @@
-const CACHE_NAME = 'imoney-v2';
+const CACHE_NAME = 'imoney-v5';
 const ASSETS = [
     './',
     './index.html',
     './style.css',
     './main.js',
+    './manifest.json',
     './assets/logo.png',
     './assets/hero.png',
     './assets/dashboard.png',
