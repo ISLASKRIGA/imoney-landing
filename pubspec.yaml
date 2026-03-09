@@ -1,0 +1,51 @@
+name: prueba
+description: "A new Flutter project for Voice Finance App"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  
+  # Stack Requirement: State Management
+  flutter_riverpod: ^2.6.1
+  
+  # Stack Requirement: Voice
+  speech_to_text: ^7.0.0
+  permission_handler: ^11.3.1
+  
+  # Stack Requirement: Persistence (Drift)
+  drift: ^2.24.2
+  sqlite3_flutter_libs: ^0.5.24
+  path_provider: ^2.1.4
+  path: ^1.9.0
+  
+  # Stack Requirement: Formatting & Charts
+  intl: ^0.20.2
+  fl_chart: ^0.70.2
+  google_fonts: ^6.2.1
+  
+  # Utilities
+  equatable: ^2.0.7
+  uuid: ^4.5.1
+  logger: ^2.5.0
+  shared_preferences: ^2.5.3
+  excel: ^4.0.6
+  share_plus: ^12.0.1
+  dotted_border: ^2.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  
+  # Code Gen for Drift
+  drift_dev: ^2.24.2
+  build_runner: ^2.4.14
+
+flutter:
+  uses-material-design: true

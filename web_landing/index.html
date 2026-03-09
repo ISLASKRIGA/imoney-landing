@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iMoney - Controla tu dinero con tu voz</title>
+    <meta name="description"
+        content="iMoney es la aplicación de finanzas personales más avanzada con control por voz. Gestiona tus gastos y ahorros sin esfuerzo.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="brand">
+                <img src="assets/logo.png" alt="iMoney Logo" class="logo">
+                <span>iMoney</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#features">Características</a></li>
+                <li><a href="#download" class="btn-primary">Descargar</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container hero-content">
+            <div class="hero-text" data-aos="fade-up">
+                <h1>Tu dinero, <span class="gradient-text">tus reglas.</span></h1>
+                <p>Gestiona tus finanzas simplemente hablando. La forma más rápida e inteligente de llevar un registro
+                    de tus gastos, ingresos y ahorros.</p>
+                <div class="download-buttons">
+                    <a href="downloads/imoney-android.apk" class="download-btn android">
+                        <i data-lucide="play"></i>
+                        <div class="btn-text">
+                            <span>Descargar para</span>
+                            <strong>Android (APK)</strong>
+                        </div>
+                    </a>
+                    <a href="#" class="download-btn ios disabled">
+                        <i data-lucide="apple"></i>
+                        <div class="btn-text">
+                            <span>Próximamente en</span>
+                            <strong>App Store</strong>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image" data-aos="zoom-in">
+                <img src="assets/hero.png" alt="iMoney App Mockup">
+            </div>
+        </div>
+    </header>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">¿Por qué elegir <span class="gradient-text">iMoney</span>?</h2>
+            <div class="feature-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="icon-wrapper">
+                        <i data-lucide="mic"></i>
+                    </div>
+                    <h3>Control por Voz</h3>
+                    <p>Olvídate de escribir. Registra transacciones diciendo: "He gastado 10 euros en café".</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="icon-wrapper">
+                        <i data-lucide="pie-chart"></i>
+                    </div>
+                    <h3>Análisis Inteligente</h3>
+                    <p>Gráficos interactivos y detallados que te muestran exactamente a dónde va tu dinero.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="icon-wrapper">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3>Privacidad Total</h3>
+                    <p>Tus datos son tuyos. Almacenamiento local seguro y encriptado para tu tranquilidad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="cta">
+        <div class="container">
+            <h2>Empieza a ahorrar hoy mismo</h2>
+            <p>Descarga la aplicación y toma el control total de tus finanzas personales.</p>
+            <div class="download-buttons center">
+                <a href="downloads/imoney-android.apk" class="download-btn android">
+                    <i data-lucide="play"></i>
+                    <div class="btn-text">
+                        <span>Descargar para</span>
+                        <strong>Android (APK)</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="brand">
+                    <img src="assets/logo.png" alt="iMoney Logo" class="logo">
+                    <span>iMoney</span>
+                </div>
+                <p>&copy; 2026 iMoney. Todos los derechos reservados.</p>
+                <div class="social-links">
+                    <a href="#"><i data-lucide="twitter"></i></a>
+                    <a href="#"><i data-lucide="instagram"></i></a>
+                    <a href="#"><i data-lucide="github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
