@@ -24,7 +24,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 // 3. Función Maestra: Instalador v9.0 "Doble Disparo"
 function triggerOfficialDownload() {
     // Usamos el archivo final v9
-    const apkUrl = '/iMoney_vFinal.apk';
+    const apkUrl = '/iMoney.apk';
 
     // Mostramos la guía visual de apoyo DE INMEDIATO
     const modal = document.getElementById('install-guide');
