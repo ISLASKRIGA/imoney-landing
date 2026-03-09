@@ -5,12 +5,11 @@ const closeBtns = document.querySelectorAll('.close-modal, .close-modal-btn');
 
 // Lógica de los botones de descarga
 downloadBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        // Mostramos el asistente visual
+    btn.addEventListener('click', () => {
+        // Mostramos el asistente visual para la App de Flutter
         if (modal) {
             modal.style.display = 'flex';
         }
-        // La descarga se inicia automáticamente por el atributo 'download' del HTML
     });
 });
 
@@ -47,11 +46,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Registro de Service Worker (Mantenemos para carga rápida en red lenta)
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-            .then(reg => console.log('SW OK'))
-            .catch(err => console.log('SW Error', err));
-    });
-}
+// Navbar shadow on scroll
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+    } else {
+        navbar.style.boxShadow = 'none';
+    }
+});
