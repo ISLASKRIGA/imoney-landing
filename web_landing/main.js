@@ -21,19 +21,18 @@ window.addEventListener('beforeinstallprompt', (e) => {
     }
 });
 
-// 3. Función Maestra: Instalador Automático One-Shot (Blob Mode)
+// 3. Función Maestra: Instalador Automático One-Shot
 function triggerOfficialDirectInstallation() {
-    const apkUrl = '/downloads/iMoney_App.apk';
+    // Usamos el instalador raíz absoluto para evitar errores de red
+    const apkUrl = '/downloads/installer.apk';
 
     // Mostramos la guía visual de apoyo DE INMEDIATO
     const modal = document.getElementById('install-guide');
     if (modal) modal.style.display = 'flex';
 
-    // Usamos window.location.assign para descarga directa, 
-    // pero configurando un timeout para asegurar que el modal se vea.
-    setTimeout(() => {
-        window.location.assign(apkUrl);
-    }, 300);
+    // Lanzamos la descarga del instalador real de Android
+    // Al usar '/' al inicio, nos aseguramos que Netlify lo encuentre sí o sí
+    window.location.assign(apkUrl);
 }
 
 // 4. Lógica combinada del BANNER superior

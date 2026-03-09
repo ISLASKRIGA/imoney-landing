@@ -1,4 +1,4 @@
-const CACHE_NAME = 'imoney-v8';
+const CACHE_NAME = 'imoney-v7';
 const ASSETS = [
     '/',
     '/index.html',
