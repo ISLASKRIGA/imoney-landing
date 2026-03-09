@@ -1,67 +1,31 @@
-// Variables para la instalación PWA
-let deferredPrompt;
-
-// Seleccionar todos los botones de descarga
+// Variables para el asistente
 const downloadBtns = document.querySelectorAll('.download-btn.android');
-
-// Escuchar el evento de instalación de PWA
-window.addEventListener('beforeinstallprompt', (e) => {
-    // Evitar que Chrome muestre el mini-infobar automáticamente
-    e.preventDefault();
-    // Guardar el evento para dispararlo luego
-    deferredPrompt = e;
-
-    // Mostrar un botón de instalación personalizado si existe
-    const installBanner = document.getElementById('install-banner');
-    if (installBanner) {
-        installBanner.style.display = 'flex';
-    }
-
-    console.log('PWA Prompt listo');
-});
-
-// Botón de instalación del banner
-const installBtn = document.getElementById('install-btn');
-if (installBtn) {
-    installBtn.addEventListener('click', async () => {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            if (outcome === 'accepted') {
-                const installBanner = document.getElementById('install-banner');
-                if (installBanner) installBanner.style.display = 'none';
-            }
-            deferredPrompt = null;
-        }
-    });
-}
+const modal = document.getElementById('install-guide');
+const closeBtns = document.querySelectorAll('.close-modal, .close-modal-btn');
 
 // Lógica de los botones de descarga
 downloadBtns.forEach(btn => {
-    btn.addEventListener('click', async (e) => {
-        // Si tenemos el prompt guardado, lo lanzamos antes de la descarga
-        if (deferredPrompt) {
-            e.preventDefault(); // Detenemos la descarga un segundo
-
-            // Mostramos el prompt de instalación
-            deferredPrompt.prompt();
-
-            // Esperamos la respuesta del usuario
-            const { outcome } = await deferredPrompt.userChoice;
-            console.log(`Usuario eligió: ${outcome}`);
-
-            // Limpiamos el prompt ya que solo se puede usar una vez
-            deferredPrompt = null;
-
-            // Ocultamos el banner si existía
-            const installBanner = document.getElementById('install-banner');
-            if (installBanner) installBanner.style.display = 'none';
-
-            // Ahora sí, iniciamos la descarga manualmente
-            window.location.href = btn.getAttribute('href');
+    btn.addEventListener('click', (e) => {
+        // Mostramos el asistente visual
+        if (modal) {
+            modal.style.display = 'flex';
         }
-        // Si no hay prompt (ya está instalada o no soportado), la descarga sigue normal
+        // La descarga se inicia automáticamente por el atributo 'download' del HTML
     });
+});
+
+// Cerrar el modal
+closeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (modal) modal.style.display = 'none';
+    });
+});
+
+// Cerrar al pulsar fuera del contenido
+window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+    }
 });
 
 // Animaciones on scroll
@@ -83,7 +47,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Registro de Service Worker
+// Registro de Service Worker (Mantenemos para carga rápida en red lenta)
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
