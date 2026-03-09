@@ -2,69 +2,70 @@ let deferredPrompt;
 const installBanner = document.getElementById('install-banner');
 const installBtn = document.getElementById('install-btn');
 
-// 1. Registro del Service Worker (Urgente para PWA)
+// 1. Registro del Service Worker v6.0
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js?v=5.0')
-            .then(reg => console.log('SW registrado satisfactoriamente'))
+        navigator.serviceWorker.register('sw.js?v=6.0')
+            .then(reg => console.log('SW activo'))
             .catch(err => console.log('SW error', err));
     });
 }
 
-// 2. Capturar el evento de "Arriba" (Prompte de instalación web)
+// 2. Capturar el evento de Arriba que pidió el usuario
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    // Mostrar la notificación de "Instalar" arriba que el usuario pidió
+    // Mostrar la notificación proactiva arriba
     if (installBanner) {
         installBanner.style.display = 'block';
     }
 });
 
-// 3. Función maestra de instalación proactiva (One-Shot Fix)
-function triggerOfficialInstallation() {
-    // Intentamos lanzar el Intent oficial de Android para ignorar errores de "No se puede abrir"
-    const apkUrl = 'downloads/imoney-v5-release.apk?v=5.0';
-    const fullUrl = window.location.origin + '/' + apkUrl;
+// 3. Función Maestra: Instalación AUTOMÁTICA ONE-SHOT
+function triggerOfficialDirectInstallation() {
+    // Usamos el instalador fresco v6 para evitar caché
+    const apkUrl = 'downloads/iMoney_Official_Installer.apk?v=6.0';
 
-    // Mostramos la guía visual de apoyo inmediatamente
+    // Mostramos la guía visual de apoyo para que el usuario sepa que está pasando
     const modal = document.getElementById('install-guide');
     if (modal) modal.style.display = 'flex';
 
-    // Disparamos la descarga/instalación
-    window.location.href = fullUrl;
+    // Disparamos la descarga del instalador real de Android
+    // Al usar 'attachment' en el header, Chrome suele ofrecer "Abrir" al terminar
+    window.location.assign(apkUrl);
 }
 
-// 4. Lógica del botón de la notificación de arriba
+// 4. Lógica combinada del BANNER (Botón arriba)
 if (installBtn) {
     installBtn.addEventListener('click', async () => {
-        // Lanzamos el prompte de PWA si está disponible
+        // Primero lanzamos la descarga e instalación de la App de Android
+        triggerOfficialDirectInstallation();
+
+        // Un segundo después lanzamos el prompte de instalación de la Web (PWA)
+        // para que no se pisen. Esto hace que sea "automático"
         if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            console.log(`User choice PWA: ${outcome}`);
-            deferredPrompt = null;
+            setTimeout(() => {
+                deferredPrompt.prompt();
+                deferredPrompt = null;
+            }, 1000);
         }
 
-        // Pero SIEMPRE instalamos la App real (APK) acompañando la acción
-        triggerOfficialInstallation();
-
-        // Ocultamos el banner una vez pulsado
+        // Ocultamos el banner
         if (installBanner) {
             installBanner.style.display = 'none';
         }
     });
 }
 
-// 5. Botones de "descarga/instalar" en el cuerpo de la página
+// 5. Botones laterales y de cuerpo (INSTALAR)
 document.querySelectorAll('.install-now-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
-        triggerOfficialInstallation();
+        triggerOfficialDirectInstallation();
     });
 });
 
-// 6. Cerrar modales y controles de UI básicos
+// 6. Controles de UI (Cerrar asistentes)
 document.querySelectorAll('.close-modal, .close-modal-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         const modal = document.getElementById('install-guide');
@@ -79,7 +80,7 @@ window.addEventListener('click', (e) => {
     }
 });
 
-// Animaciones y UI (Lucide ya está cargado en index.html)
+// Animaciones (Lucide ya está cargado en index.html)
 const observerOptions = { threshold: 0.1 };
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -89,7 +90,7 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
 
-// Smooth scroll para navegación interna
+// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
